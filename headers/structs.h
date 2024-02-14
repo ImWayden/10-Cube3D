@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:16:01 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/14 16:32:09 by wayden           ###   ########.fr       */
+/*   Updated: 2024/02/14 17:28:32 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,14 @@ typedef struct s_mapdata
 	t_color	color_floor;
 	t_color	color_ceiling;
 }	t_mapdata;
+
+typedef struct s_cubvar
+{
+	int no;
+	int so;
+	int we;
+	int ea;
+
+} t_cubvar;
 
 #endif

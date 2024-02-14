@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:09:57 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/14 16:47:21 by wayden           ###   ########.fr       */
+/*   Updated: 2024/02/14 20:08:22 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,11 @@ int **map_parser(char *line, t_mapdata *data, int i, int fd)
 		line = get_next_line(fd);
 		length++;
 	}
+	data->length = length;
+	data->size = size;
 	free(line);
 	return (map_maker(size, data, i, length));
 }
-
-
-
 
 /*
 	renvois une struct t_color former des trois int r g b;
@@ -164,6 +163,7 @@ t_color get_color(char *line)
 		color.r = -1;
 	return (color);
 }
+
 /*
 	renvois la chaine de caractere correspondant au path vers la texture
 	sinon renvois ERR_MULTIPLE_PATH (! un caractere qui ne peut pas etre un path correct de toute facon)
@@ -225,6 +225,124 @@ int cub_analyzer(char *line, t_mapdata *data, int i, int fd)
 	return (0);
 }
 
+int check_colors(t_mapdata *data)
+{
+	t_color color;
+	
+	color = data->color_ceiling;
+	if(color.r < 0 || color.r > 255) //pourrait etre remplacer par une boucle
+		return (1);
+	if(color.g < 0 || color.g > 255)
+		return (1);
+	if(color.b < 0 || color.b > 255)
+		return (1);
+	color = data->color_floor;
+	if(color.r < 0 || color.r > 255)
+		return (1);
+	if(color.g < 0 || color.g > 255)
+		return (1);
+	if(color.b < 0 || color.b > 255)
+		return (1);
+	return (0);
+}
+
+int check_textures(t_mapdata *data)
+{
+	int fd;
+
+	fd = open(data->path_we, O_RDONLY);
+	if (fd == -1)
+		return (1);
+	fd = open(data->path_ea, O_RDONLY);
+	if (fd == -1)
+		return (1);
+	fd = open(data->path_so, O_RDONLY);
+	if (fd == -1)
+		return (1);
+	fd = open(data->path_no, O_RDONLY);
+	if (fd == -1)
+		return (1);
+	return (0);
+}
+
+
+int ft_isvoid(int actual)
+{
+
+	return ((actual == 0 || (actual >= N && actual <= SP)));
+}
+
+int check_wall(t_mapdata *data, int y, int x, int actual)
+{
+	if((y == 0 || x == 0 || y == data->length || x == data->size )\
+	 && ft_isvoid(actual))
+			return (1);
+	if(actual == SP &&\
+	((x != data->size && ft_isvoid(data->map[y][x + 1]))\
+	|| (x != 0 && ft_isvoid(data->map[y][x - 1]))\
+	|| (y != data->length && ft_isvoid(data->map[y + 1][x]))\
+	|| (y != 0 && ft_isvoid(data->map[y - 1][x]))))
+			return (1);
+	return (0);	
+}
+
+int check_char(int c, t_cubvar *vars)
+{
+	if(c == N && ++vars->no > 1)
+		return (1);
+	if(c == S && ++vars->so > 1)
+		return (1);
+	if(c == E && ++vars->ea > 1)
+		return (1);
+	if(c == W && ++vars->we > 1)
+		return (1);
+	return(0);
+}
+
+int check_map(t_mapdata *data)
+{
+	int			y;
+	int			x;
+	int			error;
+	t_cubvar	vars;
+	
+	y = -1;
+	x = -1;
+	vars = (t_cubvar){0, 0, 0, 0};
+	while(++y < data->length)
+	{
+		while(++x < data->size)
+		{
+			error = check_char(data->map[y][x], &vars);
+			if (error)
+				return (error);
+			error = check_wall(data, y, x, data->map[y][x]);
+			if (error)
+				return (error);
+		}
+	}
+	if (!vars.ea && !vars.no && !vars.so && !vars.we)
+		error = 1;
+	return (error);
+}
+
+int check_for_errors(t_mapdata *data)
+{
+	static int (*checkers[3])(t_mapdata *) =\
+	{check_colors, check_textures, check_map};
+	int			i;
+	int			error;
+
+	error = 0;
+	i = -1;
+	while (++i < 3)
+	{
+		error = checkers[i](data);
+		if (error)
+			return error;
+	}
+	return (0);
+}
 
 /*
 parse ligne par ligne le fichier map si celui ci est de la bonne extension et lisible
@@ -252,10 +370,6 @@ void cub_parser(int fd, t_mapdata *data)
 	if (error)
 		print_error(error);
 }
-
-
-
-
 
 /* TODO
 
