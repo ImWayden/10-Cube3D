@@ -6,14 +6,14 @@
 #    By: wayden <wayden@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 19:22:33 by wayden            #+#    #+#              #
-#    Updated: 2024/02/14 04:06:52 by wayden           ###   ########.fr        #
+#    Updated: 2024/02/15 03:41:37 by wayden           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = cc
-CXXFLAGS = -Wall -Werror -Wextra
+CXXFLAGS = -Wall -Werror -Wextra -g3
 
-SRCS = main.c
+SRCS = main_test.c
 OBJS = $(patsubst %.cpp,obj/%.o,$(SRCS))
 NAME = Cub3D
 
