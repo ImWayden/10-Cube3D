@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:09:57 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 03:17:02 by wayden           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:54:03 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ char *get_texture_path(char *line, char *path)
 		continue ;
 	if (line[i] && line[i] != '\n')
 		return (ft_strdup(ERR_MULTIPLE_PATH));
-	return (ft_substr(line, j, i));
+	return (ft_substr(line, j, k));
 }
 
 /*
@@ -229,25 +229,28 @@ int cub_analyzer(char *line, t_mapdata *data, int i, int fd)
 	return (0);
 }
 
+int ft_isinrange(int min_max[2], int i)
+{
+	return(i >= min_max[0] && i <= min_max[1]);
+}
+
 int check_colors(t_mapdata *data)
 {
 	t_color color;
-	
+	int		i;
+	int		check;
+
+	check = 0;
+	i = -1;
 	color = data->color_ceiling;
-	if(color.r < 0 || color.r > 255) //pourrait etre remplacer par une boucle
-		return (1);
-	if(color.g < 0 || color.g > 255)
-		return (1);
-	if(color.b < 0 || color.b > 255)
-		return (1);
-	color = data->color_floor;
-	if(color.r < 0 || color.r > 255)
-		return (1);
-	if(color.g < 0 || color.g > 255)
-		return (1);
-	if(color.b < 0 || color.b > 255)
-		return (1);
-	return (0);
+	while(++i < 2)
+	{
+		check += !ft_isinrange((int[2]){0,255}, color.r);
+		check += !ft_isinrange((int[2]){0,255}, color.g);
+		check += !ft_isinrange((int[2]){0,255}, color.b);
+		color = data->color_floor;
+	}
+	return (check);
 }
 
 int check_textures(t_mapdata *data)
@@ -293,13 +296,13 @@ int check_wall(t_mapdata *data, int y, int x, int actual)
 int check_char(int c, t_cubvar *vars)
 {
 	if(c == N && ++vars->no > 1)
-		return (1);
+		return (ERRCODE_MAP_TOOMUCHSPAWM);
 	if(c == S && ++vars->so > 1)
-		return (1);
+		return (ERRCODE_MAP_TOOMUCHSPAWM);
 	if(c == E && ++vars->ea > 1)
-		return (1);
+		return (ERRCODE_MAP_TOOMUCHSPAWM);
 	if(c == W && ++vars->we > 1)
-		return (1);
+		return (ERRCODE_MAP_TOOMUCHSPAWM);
 	return(0);
 }
 
@@ -370,7 +373,7 @@ void cub_parser(int fd, t_mapdata *data)
 		line = get_next_line(fd);
 	}
 	free(line);
-	error = check_for_errors(data);
+	//error = check_for_errors(data);
 	if (error)
 		print_error(error);
 }

@@ -6,13 +6,14 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:19:57 by therodri          #+#    #+#             */
-/*   Updated: 2024/02/13 23:36:27 by wayden           ###   ########.fr       */
+/*   Updated: 2024/02/15 15:37:59 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <limits.h>
 # include <stddef.h>
 # include <stdlib.h>
 # include <string.h>

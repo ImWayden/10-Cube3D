@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:16:01 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/14 17:28:32 by wayden           ###   ########.fr       */
+/*   Updated: 2024/02/15 15:44:09 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ typedef struct s_cubvar
 	int ea;
 
 } t_cubvar;
+
+
+typedef t_color t_3int;
 
 #endif
