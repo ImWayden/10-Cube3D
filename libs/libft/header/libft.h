@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:19:57 by therodri          #+#    #+#             */
-/*   Updated: 2024/02/15 15:37:59 by wayden           ###   ########.fr       */
+/*   Updated: 2024/02/15 23:23:17 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@
 	or -1 if not found 
 */
 int		ft_istrchr(const char *s, int c);
+int		ft_isinrange(int min_max[2], int i);
 char	*ft_strchr(const char *s, int c);
 int		ft_atoi(const char *nptr);
+int		ft_err_atoi(const char *nptr, int *ret, int *j);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_is_whitespace(char c);

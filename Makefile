@@ -6,15 +6,16 @@
 #    By: wayden <wayden@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 19:22:33 by wayden            #+#    #+#              #
-#    Updated: 2024/02/15 03:41:37 by wayden           ###   ########.fr        #
+#    Updated: 2024/02/15 23:46:44 by wayden           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = cc
 CXXFLAGS = -Wall -Werror -Wextra -g3
 
-SRCS = main_test.c
-OBJS = $(patsubst %.cpp,obj/%.o,$(SRCS))
+SRCS = main_test.c map_checker_utils.c map_checker.c map_checker2.c\
+	map_checker3.c map_checker4.c error_manager.c
+OBJS = $(patsubst %.c,obj/%.o,$(SRCS))
 NAME = Cub3D
 
 LIBS_DIR = libs
@@ -37,7 +38,7 @@ obj:
 $(NAME): $(OBJS) $(LIBS_A)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-obj/%.o: %.cpp
+obj/%.o: %.c
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(LIBS_A):

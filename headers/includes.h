@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:53:04 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/13 23:42:43 by wayden           ###   ########.fr       */
+/*   Updated: 2024/02/15 22:58:41 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 #include "libs/libft/header/libft.h"
 #include "structs.h"
 #include "cub_defines.h"
+#include "prototypes.h"
 
 #endif

@@ -6,7 +6,7 @@
 #    By: wayden <wayden@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 20:56:08 by therodri          #+#    #+#              #
-#    Updated: 2024/02/13 22:50:24 by wayden           ###   ########.fr        #
+#    Updated: 2024/02/15 23:23:03 by wayden           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 
 ISFILES = ft_atoi  ft_isalnum ft_isascii ft_isdigit ft_isprint\
-	ft_isalpha ft_itoa ft_is_whitespace
+	ft_isalpha ft_itoa ft_is_whitespace ft_isinrange ft_err_atoi
 MEMFILES = ft_bzero ft_memchr ft_memcpy ft_memmove ft_memset ft_memcmp ft_calloc
 PRINTFILES = ft_putnbr_fd ft_putstr_fd ft_putchar_fd ft_putendl_fd
 STRFILES = ft_split ft_strchr ft_strdup ft_striteri ft_strjoin ft_strlcat\

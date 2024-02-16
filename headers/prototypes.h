@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_defines.h                                    :+:      :+:    :+:   */
+/*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 23:07:52 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 23:09:22 by wayden           ###   ########.fr       */
+/*   Created: 2024/02/15 22:56:33 by wayden            #+#    #+#             */
+/*   Updated: 2024/02/15 23:45:06 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_DEFINES_H
-# define LIBFT_DEFINES_H
-# define S0 0b00
-# define S1 0b01
-# define S2 0b10
+#ifndef PROTOTYPES_H
+# define PROTOTYPES_H
 
-typedef struct s_3int{
-	int i;
-	int j;
-	int k;
-} t_3int;
-
+# include "includes.h" 
+/*map checker*/
+int		check_map(t_mapdata *data);
+int		**map_parser(char *line, t_mapdata *data, int i, int fd);
+void	cub_parser(int fd, t_mapdata *data);
+int		check_for_errors(t_mapdata *data);
+void	free_struct_map(t_mapdata *data);
+void	error_manager(int error_code, t_mapdata *data);
+int		ft_isvalid(char c);
 #endif
