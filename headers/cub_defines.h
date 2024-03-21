@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 23:35:13 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 17:43:51 by wayden           ###   ########.fr       */
+/*   Updated: 2024/03/20 22:06:01 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,9 @@
 # define ERR_MAP_UNCLOSED "the map isn't closed properly"
 # define ERR_MAP_TOOMUCHSPAWM "too much spawn point error placeholder"
 
-enum errorcodes{
-	ERRCODE_PATH_EAST = 1,
-	ERRCODE_PATH_WEST,
-	ERRCODE_PATH_NORTH,
-	ERRCODE_PATH_SOUTH,
-	ERRCODE_COLOR_INVALID,
-	ERRCODE_MAP_NOSPAWN,
-	ERRCODE_MAP_UNCLOSED,
-	ERRCODE_MAP_TOOMUCHSPAWM,
-	ERRCODE_MAP_LINE,
-	ERRCODE_PATH_EAST2,
-	ERRCODE_PATH_WEST2,
-	ERRCODE_PATH_NORTH2,
-	ERRCODE_PATH_SOUTH2,
-};
+# define ERR_MAP_UNWANTED_CHAR "Map contains unwanted characters"
+
+# define WIDTH 1920
+# define HEIGHT 1080
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   map_errorcheck.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:55:42 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 23:42:42 by wayden           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:35:58 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int check_char(int c, t_cubvar *vars)
 		return (ERRCODE_MAP_TOOMUCHSPAWM);
 	if(c == W && ++vars->we > 1)
 		return (ERRCODE_MAP_TOOMUCHSPAWM);
+	if(c == -1)
+		return (ERRCODE_MAP_UNWANTED_CHAR);
 	return(0);
 }
 

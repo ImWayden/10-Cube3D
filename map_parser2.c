@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker4.c                                     :+:      :+:    :+:   */
+/*   map_parser2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 23:31:27 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 23:34:00 by wayden           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:33:41 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ int **map_parser(char *line, t_mapdata *data, int i, int fd)
 	while(line != NULL)
 	{
 		tmp = maplength(line);
-		if(tmp == -1)
-			return (free(line), NULL);
+		// if(tmp == -1)
+		// 	return (free(line), NULL);
 		if(tmp > size)
 			size = tmp;
 		free(line);

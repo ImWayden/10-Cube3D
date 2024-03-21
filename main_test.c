@@ -6,18 +6,12 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 03:07:08 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 23:32:41 by wayden           ###   ########.fr       */
+/*   Updated: 2024/03/19 17:36:35 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/includes.h"
 #include <stdio.h>
-
-
-
-
-
-
 
 
 void debug_print_data(t_mapdata *data)

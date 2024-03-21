@@ -1,0 +1,2 @@
+
+Path checker ne prend pas en compte une erreur de path vers texture si jamais le path est valide mais suivi d'un espace et d'une lettre
