@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:34:32 by wayden            #+#    #+#             */
-/*   Updated: 2024/03/20 21:47:21 by wayden           ###   ########.fr       */
+/*   Updated: 2024/03/27 18:37:35 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,17 @@ t_mlx *get_mlx()
 	}
 	return &mlx;
 }
+
+t_img *get_img()
+{
+    static t_img img;
+
+    if (!sget_init(IMG, NOP) && sget_init(IMG, SET)) 
+    {
+        img.img = mlx_new_image(get_mlx(1)->mlx_ptr, WIDTH, HEIGHT);
+        img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, 
+        &img.line_length, &img.endian);
+    }
+    return &img;
+}
+

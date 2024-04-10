@@ -6,15 +6,17 @@
 #    By: wayden <wayden@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 19:22:33 by wayden            #+#    #+#              #
-#    Updated: 2024/03/19 18:01:44 by wayden           ###   ########.fr        #
+#    Updated: 2024/04/09 12:14:50 by wayden           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = cc
 CXXFLAGS = -Wall -Werror -Wextra -g3
 
-SRCS = main_test.c map_utils.c map_errorcheck.c map_errorcheck2.c\
-	map_parser2.c map_parser.c error_manager.c
+SRCS = main_test.c debug.c \
+	map_utils.c map_errorcheck.c map_errorcheck2.c map_parser2.c map_parser.c map_utils.c \
+	error_manager.c singletons.c Logic_update.c hooks.c
+	 
 OBJS = $(patsubst %.c,obj/%.o,$(SRCS))
 NAME = Cub3D
 

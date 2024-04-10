@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:16:01 by wayden            #+#    #+#             */
-/*   Updated: 2024/03/20 21:20:04 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:33:14 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,23 @@ typedef struct s_cubvar
 	int so;
 	int we;
 	int ea;
-
 } t_cubvar;
 
 
-typedef struct s_position
+typedef struct s_vec2
 {
-	int x;
-	int y;	
-} t_position;
+	double x;
+	double y;	
+} t_vec2;
+
+
 
 typedef struct s_player
 {
-	t_position pos;
-	
+	t_vec2 pos;
+	t_vec2 direction;
+	t_vec2 Camera;
+	double speed; 
 } t_player;
 
 typedef struct s_mlx
@@ -87,5 +90,38 @@ typedef struct	s_img {
 	int		line_length;
 	int		endian;
 }				t_img;
+
+typedef struct s_keybinds{
+	
+	int walk_up;
+	int walk_left;
+	int walk_right;
+	int walk_down;
+	
+	double fov;
+} t_keybinds;
+
+typedef struct s_raydata{
+	
+	double *deltadist;
+	double *sidedist;
+	double *raydir;
+	int *step;
+	
+} t_raydata;
+
+typedef struct s_rayutils{
+	double camera_x; 
+	int map_x; //coordonée de la case sur laquelle se trouve le joueur 
+	int map_y; // changera au fur et a mesure que le rayon sera trqace
+	t_vec2 ray_dir; //player dir
+	t_vec2 side_dist; // contient a la fois la taille du rayon vers le rpochainn x et le provhain y
+	t_vec2 delta_dist;
+	double perp_wall_dist;
+	int step_x;
+	int step_y;
+	int hit;
+	int side;
+} t_rayutils;
 
 #endif

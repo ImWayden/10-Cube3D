@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:56:33 by wayden            #+#    #+#             */
-/*   Updated: 2024/03/20 21:49:48 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/09 11:53:01 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,16 @@ int		check_for_errors(t_mapdata *data);
 void	free_struct_map(t_mapdata *data);
 void	error_manager(int error_code, t_mapdata *data);
 int		ft_isvalid(char c);
+
+/*Singletons*/
+t_img *get_img();
+t_mlx *get_mlx();
+
+
+/* hook */
+void init_hook(void);
+
+
+/*debug*/
+void debug_print_data(t_mapdata *data);
 #endif

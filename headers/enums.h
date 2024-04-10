@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:48:11 by wayden            #+#    #+#             */
-/*   Updated: 2024/03/20 21:49:18 by wayden           ###   ########.fr       */
+/*   Updated: 2024/03/27 18:56:11 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ typedef enum e_refresh
 typedef enum e_init
 {
 	MLX,
+	IMG,
 }	t_init;
+
+
+typedef enum e_xevent  
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+} t_xevent;
 
 #endif

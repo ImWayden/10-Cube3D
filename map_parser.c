@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker3.c                                     :+:      :+:    :+:   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 23:27:33 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 23:40:50 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/09 12:06:32 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static t_color get_color(char *line)
 	t_color color;
 	
 	i = 0;
-	color = (t_color){-1,-1,-1};
-	ft_err_atoi(line, &color.r, &i);
+	color = (t_color){-1};
+	ft_err_atoi(line, (int *)&color.r, &i);
 	(void)(line[i] && i++);
-	ft_err_atoi(line, &color.g, &i);
+	ft_err_atoi(line, (int *)&color.g, &i);
 	(void)(line[i] && i++);
-	ft_err_atoi(line, &color.b, &i);
+	ft_err_atoi(line, (int *)&color.b, &i);
 	(void)(line[i] && i++);
 	while(line[i] && ft_is_whitespace(line[i]))
 		i++;
