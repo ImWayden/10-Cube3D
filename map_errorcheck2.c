@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker2.c                                     :+:      :+:    :+:   */
+/*   map_errorcheck2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:59:19 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 23:41:30 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/11 15:48:00 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,7 @@
 
 static int check_colors(t_mapdata *data)
 {
-	t_color color;
-	int		i;
-	int		check;
-
-	check = 0;
-	i = -1;
-	color = data->color_ceiling;
-	while(++i < 2)
-	{
-		check += !ft_isinrange((int[2]){0,255}, color.r);
-		check += !ft_isinrange((int[2]){0,255}, color.g);
-		check += !ft_isinrange((int[2]){0,255}, color.b);
-		color = data->color_floor;
-	}
-	if(check)
+	if(data->color_ceiling.a + data->color_floor.a)
 		return(ERRCODE_COLOR_INVALID);
 	return (0);
 }

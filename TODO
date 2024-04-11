@@ -1,2 +1,45 @@
 
-Path checker ne prend pas en compte une erreur de path vers texture si jamais le path est valide mais suivi d'un espace et d'une lettre
+Path checker ne prend pas en compte une erreur de path 
+vers texture si jamais le path est valide mais suivi d'un espace
+ et d'une lettre
+
+
+Map parser:
+	-Besoin de retest depuis la tentative d'optimisation
+
+Player:
+	-besoin de setup sa pos en fonction du point de spawn
+	-besoin de setup sa direction en fonction du type du point de spawn
+	-besoin de setup camera perpendicualirement a sa direction
+
+Raytracing:
+	-incorporer la fonction update raytracing a l'updater
+	-changer la couleur en fonction du side
+		probablement besoin de rajouter un moyen de savoir quel side a ete toucher
+	-ajouter gestion de textures
+		probablement besoin de decomposer l'img de textures en pixel
+		puis en fonction de l'endroit taper sur le mur par le rayon ainsi qu'en fonction de la position y imprimer la couleur de pixel correpsondant a la texture, pour ca il vas probabvlement faloir faire correspondre la taille de la texture a la taille du mur
+
+Keybinds:
+	-ajouter la possibiliter de bouger
+	-ajouter pivot de camera
+		hook update changement enfocntion de la psotion du curseur avant recentrage de celui ci
+	-ajouter menu pause
+	-quitter en cliquant sur la croix
+		
+
+Menu Pause:
+	-ajouter menu keybinds management
+	-ajouter un bouton pour quitter
+	-ajouter un bouton changement de spawn
+
+
+Mlx Utils:
+	-ajouter un createur de bouton
+		doit prendre position du bouton taille couleur et texte
+		ou image on et image off
+
+
+ Affichage:
+	-ajouter couleur plafond
+	-ajouter couleur sol

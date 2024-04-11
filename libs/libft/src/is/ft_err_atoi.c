@@ -6,14 +6,14 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 23:08:04 by wayden            #+#    #+#             */
-/*   Updated: 2024/02/15 23:10:23 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/11 15:15:58 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/libft.h"
 
 /*
-	return 0  si tout c'est bien passer
+	return 0  si tout c'est bien passé
 	return -1 si aucun nbr n'a ete trouver
 	return -2 si le nombre overflow un int
 	

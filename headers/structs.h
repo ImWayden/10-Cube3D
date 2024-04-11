@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:16:01 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/10 16:33:14 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:02:13 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,36 @@
 // 	};
 	
 // }
-
+typedef struct s_vec2
+{
+	double x;
+	double y;	
+} t_vec2;
 
 typedef union s_color {
 	unsigned int hex;
 	struct
 	{
-		char	b;
-		char	g;
-		char	r;
-		char	a;
+		unsigned char	b;
+		unsigned char	g;
+		unsigned char	r;
+		unsigned char	a;
 	};
 }	t_color;
+
+typedef struct s_spawnpoints{
+	t_vec2 N;
+	t_vec2 S;
+	t_vec2 W;
+	t_vec2 E;
+} t_spawnpoints;
 
 typedef struct s_mapdata
 {
 	int		**map;
 	int		size;
 	int		length;
+	char	*char_map;
 	char	*path_no;
 	char	*path_so;
 	char	*path_we;
@@ -49,6 +61,7 @@ typedef struct s_mapdata
 	char	*name_file;
 	t_color	color_floor;
 	t_color	color_ceiling;
+	t_spawnpoints spawnscoords;
 }	t_mapdata;
 
 typedef struct s_cubvar
@@ -59,12 +72,6 @@ typedef struct s_cubvar
 	int ea;
 } t_cubvar;
 
-
-typedef struct s_vec2
-{
-	double x;
-	double y;	
-} t_vec2;
 
 
 
@@ -123,5 +130,12 @@ typedef struct s_rayutils{
 	int hit;
 	int side;
 } t_rayutils;
+
+typedef struct s_lineinfo{
+	int start;
+	int end;
+	int x;
+	t_color color;
+} t_lineinfo;
 
 #endif

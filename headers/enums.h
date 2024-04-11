@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:48:11 by wayden            #+#    #+#             */
-/*   Updated: 2024/03/27 18:56:11 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/11 11:03:12 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,18 @@ enum errorcodes{
 
 typedef enum e_refresh
 {
-	NOP,
-	REFRESH,
-	SET,
-	REFRESHALL
+	ISINIT,
+	RESET,
+	INIT,
+	RESETALL
 }	t_refresh;
 
 typedef enum e_init
 {
 	MLX,
 	IMG,
+	PLAYER,
+	INIT_COUNT,
 }	t_init;
 
 

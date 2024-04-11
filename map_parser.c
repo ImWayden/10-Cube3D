@@ -6,11 +6,36 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 23:27:33 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/09 12:06:32 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/11 15:59:57 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/includes.h"
+
+char component(char *component, char *line, int *i)
+{
+	int tmp;
+	char ret;
+	
+	tmp = 0;
+	while(line[*i] && ft_is_whitespace(line[*i]))
+		*i += 1;
+	if(ft_err_atoi(line, &tmp, i) == 0 && ft_isinrange((int[2]){0,255}, tmp))
+	{
+		if(DEBUG)
+			printf("line = %s, tmp = %d\n", line , tmp);
+		*component = tmp;
+		ret = 0;
+	}
+	else
+		ret = 1;
+	if(DEBUG)
+		printf("line = %s, tmp = %d\n", line , tmp);
+	while(line[*i] && ft_is_whitespace(line[*i]))
+		*i += 1;
+	(void)(line[*i] && (*i += 1));
+	return (ret);
+}
 
 /*
 	renvois une struct t_color former des trois int r g b;
@@ -25,16 +50,13 @@ static t_color get_color(char *line)
 	
 	i = 0;
 	color = (t_color){-1};
-	ft_err_atoi(line, (int *)&color.r, &i);
-	(void)(line[i] && i++);
-	ft_err_atoi(line, (int *)&color.g, &i);
-	(void)(line[i] && i++);
-	ft_err_atoi(line, (int *)&color.b, &i);
-	(void)(line[i] && i++);
-	while(line[i] && ft_is_whitespace(line[i]))
-		i++;
-	if(line[i] && line[i] != '\n')
-		color.r = -1;
+		
+	color.a = component(&color.r,line, &i) \
+	|| component(&color.g,line, &i) \
+	|| component(&color.b,line, &i)
+	|| (line[i] && line[i] != '\n');
+	if(DEBUG)
+		printf(" color.a = %d\n", color.a);
 	return (color);
 }
 
@@ -73,7 +95,7 @@ static char *get_texture_path(char *line, char *path)
 	si la ligne n'est pas vide et ne contient pas que des whitespaces
 	mais aucune cle connu ou bout de map alors on renvois une erreur
 */
-static int cub_analyzer(char *line, t_mapdata *data, int l, int fd)
+static int cub_analyzer(char *line, t_mapdata *data, int fd)
 {
 	int i;
 
@@ -95,7 +117,7 @@ static int cub_analyzer(char *line, t_mapdata *data, int l, int fd)
 		else if (line[i] == 'C')
 			data->color_ceiling = get_color(&line[i + 1]);
 		else if (line[i] == '0' || line[i] == '1')
-			data->map = map_parser(line, data, l, fd);
+			data->map = map_parser(line, data, fd);
 		else
 			return (-1);
 	}
@@ -114,7 +136,7 @@ void cub_parser(int fd, t_mapdata *data)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if(cub_analyzer(line, data, i, fd) == -1)
+		if(cub_analyzer(line, data, fd) == -1)
 			return(free(line), error_manager(ERRCODE_MAP_LINE, data), (void)0);
 		free(line);
 		i++;

@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"includes.h": "c",
-		"mlx.h": "c"
+		"mlx.h": "c",
+		"cub_defines.h": "c",
+		"enums.h": "c"
 	}
 }
