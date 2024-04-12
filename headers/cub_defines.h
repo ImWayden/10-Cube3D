@@ -6,14 +6,26 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 23:35:13 by wayden            #+#    #+#             */
-/*   Updated: 2024/03/28 00:30:45 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/12 05:34:13 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_DEFINES_H
 # define CUB_DEFINES_H
 
+#define COLOR_RESET "\033[0m"
 
+// Regular Colors
+#define COLOR_BLACK "\033[0;30m"
+#define COLOR_RED "\033[0;31m"
+#define COLOR_GREEN "\033[0;32m"
+#define COLOR_YELLOW "\033[0;33m"
+#define COLOR_BLUE "\033[0;34m"
+#define COLOR_MAGENTA "\033[0;35m"
+#define COLOR_CYAN "\033[0;36m"
+#define COLOR_WHITE "\033[0;37m"
+
+# define ERR_NB_ARGS "Invalid NB of Arguments\nUsage: ./Cub3D [file.cub]"
 # define ERR_MAP_LINE "invalide line has been detected in the cub file"
 # define ERR_CUB_FILE_FORMAT "the map file does not respect the .cub format"
 # define ERR_MAP_COLOR "color components should be in range [0,255]"
@@ -27,6 +39,8 @@
 # define E 5
 # define SP 6
 
+# define ERR_NOFILE "can't open file"
+# define ERR_ARG_EXT "Invalid file Extension : .cub required"
 # define ERR_PATH_EAST "Path east err placeholder"
 # define ERR_PATH_WEST "Path west err placeholder"
 # define ERR_PATH_NORTH "Path north err placeholder"
@@ -39,9 +53,9 @@
 
 # define ERR_COLOR_INVALID "invalid Color placeholder"
 
-# define ERR_MAP_NOSPAWN "err map spawnpoint placeholder"
+# define ERR_MAP_NOSPAWN "No Spawn Point Detected"
 # define ERR_MAP_UNCLOSED "the map isn't closed properly"
-# define ERR_MAP_TOOMUCHSPAWM "too much spawn point error placeholder"
+# define ERR_MAP_TOOMUCHSPAWM "Multiple SpawnPoint Detected"
 
 # define ERR_MAP_UNWANTED_CHAR "Map contains unwanted characters"
 

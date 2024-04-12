@@ -6,13 +6,13 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 23:27:33 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/11 15:59:57 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:16:38 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/includes.h"
 
-char component(char *component, char *line, int *i)
+char component(unsigned char *component, char *line, int *i)
 {
 	int tmp;
 	char ret;

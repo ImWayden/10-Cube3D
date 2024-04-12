@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:33:35 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/11 12:52:21 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/12 05:41:31 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void trace_ray(t_mapdata data, t_rayutils *u)
       		u->map_y += u->step_y;
      		u->side = 1;	
 		}
-		if(data.map[u->map_x][u->map_y] == 1)
+		if(data.map[u->map_y][u->map_x] == 1)
 			u->hit++;
 	}
 }
@@ -74,8 +74,8 @@ void calculate_walldist(t_rayutils *u)
 void cast_ray(t_player player, t_mapdata data, t_rayutils *u) 
 {
 	u->hit = 0;
-	u->ray_dir.x = player.direction.x + player.Camera.x * u->camera_x;
-	u->ray_dir.y = player.direction.y + player.Camera.y * u->camera_x;
+	u->ray_dir.x = player.direction.x + player.camera.x * u->camera_x;
+	u->ray_dir.y = player.direction.y + player.camera.y * u->camera_x;
 	u->map_x = (int)player.pos.x;
 	u->map_y = (int)player.pos.y;
 	set_deltadist(&u->delta_dist.x, u->ray_dir.x);
@@ -86,6 +86,16 @@ void cast_ray(t_player player, t_mapdata data, t_rayutils *u)
 	&u->ray_dir.y,&u->step_y}, player.pos.y, u->map_y);
 	trace_ray(data, u);
 	calculate_walldist(u);
+}
+
+void set_color(t_color *color, t_rayutils u)
+{
+
+	color->r = 0 + (255 * ((!u.side && u.step_x < 0) ||(u.side && u.step_y > 0)));
+	color->g = 0 + (255 * ((!u.side && u.step_x > 0) ||(u.side && u.step_y > 0)));
+	color->b = 0 + (255 * (u.side && u.step_y < 0));
+	color->a = 1;
+
 }
 
 void print_line(int x, t_rayutils *u, t_img *img)
@@ -100,10 +110,11 @@ void print_line(int x, t_rayutils *u, t_img *img)
 		line.start = 0;
     if(line.end >= HEIGHT)
 		line.end = HEIGHT - 1;
+	set_color(&line.color, *u);
 	ver_line_x(img, line);
 }
 
-void update_raycast(t_player player, t_mapdata data, t_mlx *mlx, t_img *img)
+void update_raycast(t_player *player, t_mapdata *data, t_mlx *mlx, t_img *img)
 {
 	t_rayutils	u;
 	int			x;
@@ -112,7 +123,8 @@ void update_raycast(t_player player, t_mapdata data, t_mlx *mlx, t_img *img)
 	while (++x < WIDTH)
 	{
 		u.camera_x = 2 * x / (double)WIDTH - 1;
-		cast_ray(player, data, &u);
+		cast_ray(*player, *data, &u);
+		//set_color(data, &u);
 		print_line(x,&u, img);
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:34:32 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/11 11:03:59 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/12 05:47:10 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,32 @@ t_img *get_img()
 t_player *get_player()
 {
 	static t_player player;
+	t_mapdata *data;
+	
 	if (!sget_init(PLAYER, ISINIT) && sget_init(PLAYER, INIT)) 
     {
-		player.Camera = (t_vec2){0,0};
-		player.direction = (t_vec2){0,0};
-		player.pos = (t_vec2){0,0};
-		player.speed = 0.0;
+		data = get_mapdata(NULL);	
+		player.direction = data->spawndir;
+		player.pos = (t_vec2){data->spawnpoint.x + 0.5, data->spawnpoint.y + 0.5};
+		player.camera = vec2_perpendicular(data->spawndir);
+		player.speed = 1.0;
     }
     return &player;
 }
+
+t_mapdata *get_mapdata(char *file)
+{
+	static t_mapdata data = {NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL,\
+		NULL, (t_color){0}, (t_color){0}, (t_vec2){0,0}, (t_vec2){0,0}};
+	if (!sget_init(MAP, ISINIT) && sget_init(MAP, INIT) && file) 
+    {
+		data.fd = open(file, O_RDONLY);
+		if (data.fd == -1)
+			error_manager(ERRCODE_NOFILE, NULL);
+		data.name_file = file;
+		cub_parser(data.fd, &data);
+		close(data.fd);
+	}
+	return &data;
+}
+

@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:59:19 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/11 15:48:00 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/12 00:08:01 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,15 @@ int check_for_errors(t_mapdata *data)
 			return error;
 	}
 	return (0);
+}
+
+int extension_check(char *line)
+{
+	int len;
+
+	len = ft_strlen(line);
+	return (line[len-1] != 'b'\
+	|| line[len - 2] != 'u'\
+	|| line[len - 3] != 'c'\
+	|| line[len - 4] != '.');
 }

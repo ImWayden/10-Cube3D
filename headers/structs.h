@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:16:01 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/11 16:02:13 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/12 00:38:59 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ typedef union s_color {
 	unsigned int hex;
 	struct
 	{
-		unsigned char	b;
-		unsigned char	g;
 		unsigned char	r;
+		unsigned char	g;
+		unsigned char	b;
 		unsigned char	a;
 	};
 }	t_color;
 
 typedef struct s_spawnpoints{
-	t_vec2 N;
-	t_vec2 S;
-	t_vec2 W;
-	t_vec2 E;
+	t_vec2 n;
+	t_vec2 s;
+	t_vec2 w;
+	t_vec2 e;
 } t_spawnpoints;
 
 typedef struct s_mapdata
@@ -53,6 +53,7 @@ typedef struct s_mapdata
 	int		**map;
 	int		size;
 	int		length;
+	int		fd;
 	char	*char_map;
 	char	*path_no;
 	char	*path_so;
@@ -61,7 +62,8 @@ typedef struct s_mapdata
 	char	*name_file;
 	t_color	color_floor;
 	t_color	color_ceiling;
-	t_spawnpoints spawnscoords;
+	t_vec2 spawnpoint;
+	t_vec2 spawndir;
 }	t_mapdata;
 
 typedef struct s_cubvar
@@ -72,14 +74,11 @@ typedef struct s_cubvar
 	int ea;
 } t_cubvar;
 
-
-
-
 typedef struct s_player
 {
 	t_vec2 pos;
 	t_vec2 direction;
-	t_vec2 Camera;
+	t_vec2 camera;
 	double speed; 
 } t_player;
 
@@ -104,8 +103,6 @@ typedef struct s_keybinds{
 	int walk_left;
 	int walk_right;
 	int walk_down;
-	
-	double fov;
 } t_keybinds;
 
 typedef struct s_raydata{

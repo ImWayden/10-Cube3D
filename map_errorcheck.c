@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:55:42 by wayden            #+#    #+#             */
-/*   Updated: 2024/03/19 18:35:58 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/12 05:05:44 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,28 @@ static int check_wall(t_mapdata *data, int y, int x, int actual)
 	return (0);	
 }
 
-static int check_char(int c, t_cubvar *vars)
+static int check_char(int c, int *nb_spawn, t_mapdata *data, t_vec2 coords)
 {
-	if(c == N && ++vars->no > 1)
-		return (ERRCODE_MAP_TOOMUCHSPAWM);
-	if(c == S && ++vars->so > 1)
-		return (ERRCODE_MAP_TOOMUCHSPAWM);
-	if(c == E && ++vars->ea > 1)
-		return (ERRCODE_MAP_TOOMUCHSPAWM);
-	if(c == W && ++vars->we > 1)
-		return (ERRCODE_MAP_TOOMUCHSPAWM);
-	if(c == -1)
+	if(c >= N && c <= E)
+	{
+		if (++*nb_spawn > 1)
+			return (ERRCODE_MAP_TOOMUCHSPAWM);
+		else
+		{
+			if (c == N)
+				data->spawndir = (t_vec2){0,-1};
+			if (c == S)
+				data->spawndir = (t_vec2){0,1};
+			if (c == W)
+				data->spawndir = (t_vec2){1,0};
+			if (c == E)
+				data->spawndir = (t_vec2){-1,0};
+			data->spawnpoint = coords;
+		}
+	}
+	if (c == -1)
 		return (ERRCODE_MAP_UNWANTED_CHAR);
-	return(0);
+	return (0);
 }
 
 int check_map(t_mapdata *data)
@@ -51,18 +60,18 @@ int check_map(t_mapdata *data)
 	int			y;
 	int			x;
 	int			error;
-	t_cubvar	vars;
+	int			nb_spawn;
 	
 	y = -1;
 	x = -1;
 	error = 0;
-	vars = (t_cubvar){0, 0, 0, 0};
+	nb_spawn = 0;
 	while(++y < data->length)
 	{
 		x = -1;
 		while(++x < data->size)
 		{
-			error = check_char(data->map[y][x], &vars);
+			error = check_char(data->map[y][x], &nb_spawn, data, (t_vec2){x,y});
 			if (error)
 				return (error);
 			error = check_wall(data, y, x, data->map[y][x]);
@@ -70,7 +79,7 @@ int check_map(t_mapdata *data)
 				return (error);
 		}
 	}
-	if (!vars.ea && !vars.no && !vars.so && !vars.we)
+	if (!nb_spawn)
 		error = ERRCODE_MAP_NOSPAWN;
 	return (error);
 }

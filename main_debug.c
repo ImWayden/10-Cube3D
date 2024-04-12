@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:44:54 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/11 16:01:39 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/12 05:39:42 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,16 @@ void debug_print_data(t_mapdata *data)
 		x = -1;
 		printf("line [%02d]  ",y);
 		while(data->map[y] != NULL && ++x < data->size)
-			printf("%d ", data->map[y][x]);
+		{
+			if (data->map[y][x] == 1)
+				printf(COLOR_CYAN"\u25A0 "COLOR_RESET);
+			else if (data->map[y][x] == 0)
+				printf(COLOR_WHITE"\u25A0 "COLOR_RESET);
+			else if (data->map[y][x] >= N && data->map[y][x] <= E)
+				printf(COLOR_GREEN"\u25A0 "COLOR_RESET);
+			else
+				printf(COLOR_BLACK"\u25A0 "COLOR_RESET);
+		}
 		printf("\n");			
 	}
 	printf("data path ea: %s\n", data->path_ea);
@@ -36,21 +45,36 @@ void debug_print_data(t_mapdata *data)
 	printf("color ceilling : %d, %d, %d\n", data->color_ceiling.r,data->color_ceiling.g,data->color_ceiling.b);
 }
 
-int main( void )
+
+void debug_print_player(t_player *player)
 {
-	t_mapdata data;
-	int fd;
-	
-	data = (t_mapdata){NULL, 0, 0, NULL, NULL,NULL,NULL,NULL,"map.cub",(t_color){0},(t_color){0},(t_spawnpoints){{0,0},{0,0},{0,0},{0,0}}};
-	fd = open(data.name_file, O_RDONLY);
-	//sget_init(INIT_COUNT - 1, RESETALL);
-	cub_parser(fd, &data);
-	close(fd);
-	if(DEBUG)
-		debug_print_data(&data);
-	// init_hook();
-	// mlx_loop(get_mlx()->mlx_ptr);
-	free_struct_map(&data);
+	printf("player.pos.x = %f\n, player.pos.y = %f\n\
+player.dir.x = %f\n, player.dir.y = %f\n\
+player.Camera.x = %f\n, player.camera.y = %f\n\
+player.speed = %f\n", player->pos.x, player->pos.y, player->direction.x, player->direction.y\
+, player->camera.x, player->camera.y, player->speed);
+}
+
+
+int main( int argc, char **argv )
+{
+	t_mapdata *data;
+	t_player  *player;
+	if (argc != 2)
+		error_manager(ERRCODE_NB_ARGS, NULL);
+	if (extension_check(argv[1]))
+		error_manager(ERRCODE_ARG_EXT, NULL);
+	sget_init(INIT_COUNT - 1, RESETALL);
+	data = get_mapdata(argv[1]);
+	player = get_player();
+	if(DEBUG)\
+	{
+		debug_print_data(data);
+		debug_print_player(player);
+	}
+	init_hook();
+	mlx_loop(get_mlx()->mlx_ptr);
+	free_struct_map(data);
 	
 	return (0);
 }
