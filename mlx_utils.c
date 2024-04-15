@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 08:23:25 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 12:26:01 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:36:33 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,7 @@ unsigned int *get_pixel_at(t_img *img, int x, int y)
 
 unsigned int get_pixel_color(t_img img, int x, int y)
 {
-    // Calculez l'index du pixel dans le tableau d'adresses en fonction de x et y
-    int index = (y * img.line_length) + (x * (img.bits_per_pixel / 8));
-
-    // Accédez à l'adresse du pixel dans l'image et convertissez-la en unsigned int
-    unsigned int color = *((unsigned int *)(img.addr + index));
-
-    // Retournez la couleur du pixel
-    return color;
+    return (*get_pixel_at(&img, x, y));
 }
 
 /*
