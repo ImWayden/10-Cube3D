@@ -16,7 +16,7 @@ Raytracing:
 	-incorporer la fonction update raytracing a l'updater ✔
 	-changer la couleur en fonction du side ✔
 		probablement besoin de rajouter un moyen de savoir quel side a ete toucher ✔
-	-ajouter gestion de textures
+	-ajouter gestion de textures ✔
 		probablement besoin de decomposer l'img de textures en pixel
 		puis en fonction de l'endroit taper sur le mur par le rayon ainsi qu'en fonction de la position y imprimer la couleur de pixel correpsondant a la texture, pour ca il vas probabvlement faloir faire correspondre la taille de la texture a la taille du mur
 
@@ -41,5 +41,8 @@ Mlx Utils:
 
 
  Affichage:
-	-ajouter couleur plafond
-	-ajouter couleur sol
+	-ajouter couleur plafond ✔
+	-ajouter couleur sol ✔
+
+Gestion d'erreur:
+	-gerer le cas ou la texture est invalide

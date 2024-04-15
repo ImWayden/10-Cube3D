@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:33:35 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 09:37:59 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:56:59 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,21 +120,19 @@ void print_line(t_player *player, int x, t_rayutils *u, t_img *img)
 {
 	t_xpm_texture *texture;
 	t_range r;
-	int lineheight;
-	
-	lineheight = (int)(HEIGHT / u->perp_wall_dist);
-	r.start = -lineheight / 2 + HEIGHT / 2;
-	r.end = lineheight / 2 + HEIGHT / 2;
-	
+
+	texture = select_wall_texture(*u);
+	texture->pos_in.x = get_x_texture(player, texture, *u);
+	texture->lineheight = (int)(HEIGHT / u->perp_wall_dist);
+	r.start = -texture->lineheight / 2 + HEIGHT / 2;
+	r.end = texture->lineheight / 2 + HEIGHT / 2;
     if(r.start < 0) 
 		r.start = 0;
     if(r.end >= HEIGHT)
 		r.end = HEIGHT - 1;
-	texture = select_wall_texture(*u);
-	texture->pos_in.x = get_x_texture(player, texture, *u);
-	ver_line_x(img, get_mapdata(NULL)->c_floor, (t_range){0,r.start}, x);
+	ver_line_x(img, get_mapdata(NULL)->c_floor, (t_range){0,r.start - 1}, x);
 	tex_ver_line_x(img, texture, r, x);
-	ver_line_x(img, get_mapdata(NULL)->c_ceiling, (t_range){r.end, HEIGHT}, x);
+	ver_line_x(img, get_mapdata(NULL)->c_ceiling, (t_range){r.end, HEIGHT-1}, x);
 }
 
 void update_raycast(t_player *player, t_mapdata *data, t_mlx *mlx, t_img *img)

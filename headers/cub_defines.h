@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 23:35:13 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 12:18:16 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:53:12 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define E 5
 # define SP 6
 
+# define LEFT 0
+# define RIGHT 1
+
 # define ERR_NOFILE "can't open file"
 # define ERR_ARG_EXT "Invalid file Extension : .cub required"
 # define ERR_PATH_EAST "Path east err placeholder"
@@ -59,8 +62,8 @@
 
 # define ERR_MAP_UNWANTED_CHAR "Map contains unwanted characters"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1600
+# define HEIGHT 900
 
 # define DEBUG 0
 

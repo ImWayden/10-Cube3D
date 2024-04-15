@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:34:32 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 12:16:55 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 20:15:17 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ t_player *get_player()
 		data = get_mapdata(NULL);	
 		player.direction = data->spawndir;
 		player.pos = (t_vec2){data->spawnpoint.x + 0.5, data->spawnpoint.y + 0.5};
-		player.camera = vec2_perpendicular(data->spawndir);
-		player.speed = 1.0;
+		player.camera = vec2_perpendicular(data->spawndir, LEFT);
+		player.speed = 0.1;
     }
     return &player;
 }
@@ -99,17 +99,22 @@ t_mapdata *get_mapdata(char *file)
 	
 // }
 
+void destroy_textures(t_xpm_texture *t, t_mlx *mlx)
+{
+	int i;
+
+	i = -1;
+	while(++i < TEXTURES_COUNT && t[i].img.addr != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, t[i].img.img);
+}
+
 
 void construct_texture(t_xpm_texture *t,char *path)
 {
-	if(DEBUG)
-		printf("before addresse texture = %ld, path %s , addr %ld\n", &t, path, t->img.addr);
 	t->img.img = mlx_xpm_file_to_image(get_mlx()->mlx_ptr, path,\
 	&t->width, &t->height);
     t->img.addr = mlx_get_data_addr(t->img.img,\
 	&t->img.bits_per_pixel, &t->img.line_length, &t->img.endian);
-	if(DEBUG)
-		printf("path = %s, %lld\n", path, t->img.addr);
 }
 
 t_xpm_texture *get_texture(int index/*,int exec, void *args[4]*/)
@@ -123,14 +128,7 @@ t_xpm_texture *get_texture(int index/*,int exec, void *args[4]*/)
 		data = get_mapdata(NULL);
 		i = -1;
 		while(++i < TEXTURES_COUNT)
-		{
-			if(DEBUG)
-				printf("before addresse texture = %ld, path %s , addr %ld\n", &textures[i], data->path[i], textures[i].img.addr);
 			construct_texture(&textures[i], data->path[i]);
-			if(DEBUG)
-				printf("after addresse texture = %ld, path %s, addr %ld \n\n\n", &textures[i], data->path[i], textures[i].img.addr);
-		}
-
 	}
 	return (&textures[index]);
 	// return (texclass_execute(&textures[index], exec, args));

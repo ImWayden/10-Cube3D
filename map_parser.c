@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 23:27:33 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 11:57:05 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:54:33 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,11 @@ char component(unsigned char *component, char *line, int *i)
 		*i += 1;
 	if(ft_err_atoi(line, &tmp, i) == 0 && ft_isinrange((int[2]){0,255}, tmp))
 	{
-		if(DEBUG)
-			printf("line = %s, tmp = %d\n", line , tmp);
 		*component = tmp;
 		ret = 0;
 	}
 	else
 		ret = 1;
-	if(DEBUG)
-		printf("line = %s, tmp = %d\n", line , tmp);
 	while(line[*i] && ft_is_whitespace(line[*i]))
 		*i += 1;
 	(void)(line[*i] && (*i += 1));
@@ -55,8 +51,6 @@ static t_color get_color(char *line)
 	|| component(&color.g,line, &i) \
 	|| component(&color.b,line, &i)
 	|| (line[i] && line[i] != '\n');
-	if(DEBUG)
-		printf(" color.a = %d\n", color.a);
 	return (color);
 }
 

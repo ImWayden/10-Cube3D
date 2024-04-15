@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:16:01 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 11:50:21 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:12:02 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_player
 	t_vec2 pos;
 	t_vec2 direction;
 	t_vec2 camera;
-	double speed; 
+	double speed;
 } t_player;
 
 typedef struct s_mlx
@@ -137,6 +137,7 @@ typedef struct s_xpm_texture{
 	int		width;
 	int		height;
 	t_vec2	pos_in;
+	double	lineheight;
 } t_xpm_texture;
 
 typedef struct s_lineinfo{
