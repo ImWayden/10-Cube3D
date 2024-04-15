@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:48:11 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/11 23:54:25 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 11:14:08 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,25 @@ typedef enum e_init
 	IMG,
 	PLAYER,
 	MAP,
+	TEXTURES,
 	INIT_COUNT,
 }	t_init;
 
+typedef enum e_textures
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	TEXTURES_COUNT
+} t_e_textures;
+
+// `typedef enum e_texclass
+// {
+// 	GET,
+// 	GETPIXELCOLOR,
+	
+// } t_e_class;
 
 typedef enum e_xevent  
 {

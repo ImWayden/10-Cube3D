@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 23:35:13 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/12 05:34:13 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:18:16 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-# define DEBUG 1
+# define DEBUG 0
 
 #endif

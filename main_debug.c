@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:44:54 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/12 05:39:42 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 11:55:00 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void debug_print_data(t_mapdata *data)
 		}
 		printf("\n");			
 	}
-	printf("data path ea: %s\n", data->path_ea);
-	printf("data path no: %s\n", data->path_no);
-	printf("data path so: %s\n", data->path_so);
-	printf("data path we: %s\n", data->path_we);
-	printf("color floor : %d, %d, %d\n", data->color_floor.r,data->color_floor.g,data->color_floor.b);
-	printf("color ceilling : %d, %d, %d\n", data->color_ceiling.r,data->color_ceiling.g,data->color_ceiling.b);
+	printf("data path ea: %s\n", data->path[EA]);
+	printf("data path no: %s\n", data->path[NO]);
+	printf("data path so: %s\n", data->path[SO]);
+	printf("data path we: %s\n", data->path[WE]);
+	printf("color floor : %d, %d, %d\n", data->c_floor.r,data->c_floor.g,data->c_floor.b);
+	printf("color ceilling : %d, %d, %d\n", data->c_ceiling.r,data->c_ceiling.g,data->c_ceiling.b);
 }
 
 
@@ -67,6 +67,7 @@ int main( int argc, char **argv )
 	sget_init(INIT_COUNT - 1, RESETALL);
 	data = get_mapdata(argv[1]);
 	player = get_player();
+	get_texture(0);
 	if(DEBUG)\
 	{
 		debug_print_data(data);

@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:33:35 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/12 05:41:31 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 09:37:59 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,47 +71,70 @@ void calculate_walldist(t_rayutils *u)
 }
 
 
-void cast_ray(t_player player, t_mapdata data, t_rayutils *u) 
+void cast_ray(t_player *player, t_mapdata data, t_rayutils *u) 
 {
 	u->hit = 0;
-	u->ray_dir.x = player.direction.x + player.camera.x * u->camera_x;
-	u->ray_dir.y = player.direction.y + player.camera.y * u->camera_x;
-	u->map_x = (int)player.pos.x;
-	u->map_y = (int)player.pos.y;
+	u->ray_dir.x = player->direction.x + player->camera.x * u->camera_x;
+	u->ray_dir.y = player->direction.y + player->camera.y * u->camera_x;
+	u->map_x = (int)player->pos.x;
+	u->map_y = (int)player->pos.y;
 	set_deltadist(&u->delta_dist.x, u->ray_dir.x);
 	set_deltadist(&u->delta_dist.y, u->ray_dir.y);
 	set_step((t_raydata){&u->delta_dist.x, &u->side_dist.x,\
-	&u->ray_dir.x,&u->step_x}, player.pos.x, u->map_x);
+	&u->ray_dir.x,&u->step_x}, player->pos.x, u->map_x);
 	set_step((t_raydata){&u->delta_dist.y, &u->side_dist.y,\
-	&u->ray_dir.y,&u->step_y}, player.pos.y, u->map_y);
+	&u->ray_dir.y,&u->step_y}, player->pos.y, u->map_y);
 	trace_ray(data, u);
 	calculate_walldist(u);
 }
 
-void set_color(t_color *color, t_rayutils u)
+t_xpm_texture *select_wall_texture(t_rayutils u)
 {
-
-	color->r = 0 + (255 * ((!u.side && u.step_x < 0) ||(u.side && u.step_y > 0)));
-	color->g = 0 + (255 * ((!u.side && u.step_x > 0) ||(u.side && u.step_y > 0)));
-	color->b = 0 + (255 * (u.side && u.step_y < 0));
-	color->a = 1;
-
+	if(!u.side && u.step_x < 0) //ouest
+		return(get_texture(WE));
+	else if(!u.side && u.step_x > 0) // east
+		return(get_texture(EA));
+	else if(u.side && u.step_y > 0) // south
+		return(get_texture(SO));
+	else if(u.side && u.step_y < 0) // north
+		return(get_texture(NO));
+	return(NULL);
 }
 
-void print_line(int x, t_rayutils *u, t_img *img)
+int get_x_texture(t_player *player, t_xpm_texture *texture, t_rayutils u)
 {
-	t_lineinfo line;
+	double true_x;
 	
-	int lineheight = (int)(HEIGHT / u->perp_wall_dist);
-	line.x = x;
-	line.start = -lineheight / 2 + HEIGHT / 2;
-	line.end = lineheight / 2 + HEIGHT / 2;
-    if(line.start < 0) 
-		line.start = 0;
-    if(line.end >= HEIGHT)
-		line.end = HEIGHT - 1;
-	set_color(&line.color, *u);
-	ver_line_x(img, line);
+	if(u.side == 0)
+		true_x = player->pos.y + u.perp_wall_dist * u.ray_dir.y;
+	else
+		true_x = player->pos.x + u.perp_wall_dist * u.ray_dir.x;
+	true_x -= floor(true_x); 
+	// on retire la partie entiere a true_x ainsi on obtient un
+	//nombre entre 0 et 1 qu'on devra ensuite multiplier par la taille de la texture afin
+	// d'avoir la coordoneer du pixel hit. on peut faire un modf sinon
+	return(true_x * texture->width);
+}
+
+void print_line(t_player *player, int x, t_rayutils *u, t_img *img)
+{
+	t_xpm_texture *texture;
+	t_range r;
+	int lineheight;
+	
+	lineheight = (int)(HEIGHT / u->perp_wall_dist);
+	r.start = -lineheight / 2 + HEIGHT / 2;
+	r.end = lineheight / 2 + HEIGHT / 2;
+	
+    if(r.start < 0) 
+		r.start = 0;
+    if(r.end >= HEIGHT)
+		r.end = HEIGHT - 1;
+	texture = select_wall_texture(*u);
+	texture->pos_in.x = get_x_texture(player, texture, *u);
+	ver_line_x(img, get_mapdata(NULL)->c_floor, (t_range){0,r.start}, x);
+	tex_ver_line_x(img, texture, r, x);
+	ver_line_x(img, get_mapdata(NULL)->c_ceiling, (t_range){r.end, HEIGHT}, x);
 }
 
 void update_raycast(t_player *player, t_mapdata *data, t_mlx *mlx, t_img *img)
@@ -123,9 +146,8 @@ void update_raycast(t_player *player, t_mapdata *data, t_mlx *mlx, t_img *img)
 	while (++x < WIDTH)
 	{
 		u.camera_x = 2 * x / (double)WIDTH - 1;
-		cast_ray(*player, *data, &u);
-		//set_color(data, &u);
-		print_line(x,&u, img);
+		cast_ray(player, *data, &u);
+		print_line(player,x,&u, img);
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img, 0, 0);
 }

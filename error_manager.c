@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:53:39 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/12 00:07:03 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 11:58:11 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void free_struct_map(t_mapdata *data)
 		free(data->map[y]);
 	free(data->map);
 	free(data->char_map);
-	free(data->path_ea);
-	free(data->path_no);
-	free(data->path_so);
-	free(data->path_we);
+	y = -1;
+	while(++y < TEXTURES_COUNT)
+		free(data->path[y]);
 }
 
 static void print_error(const char *error)

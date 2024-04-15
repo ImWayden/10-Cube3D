@@ -1,0 +1,26 @@
+/* XPM */
+static char *Wall_C_16[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 4 1 ",
+"  c #262B44",
+". c #3A4466",
+"X c #4C5A79",
+"o c #6F7F9A",
+/* pixels */
+" oooo XXXXXooo  ",
+"oXXXXo.XXXXXXXo ",
+"XXXXXXo.XXXXXXX ",
+"XXXXXXX ....... ",
+".XXXXX.  oooo   ",
+" .XXXX. oXXXXo  ",
+"  .... oXXXXXXo ",
+"  ooo  XXXXXXX. ",
+" oXXXo  XXXX..  ",
+" XXXXXoo ... oo ",
+" .XXXXXXo  ooXXo",
+"o XXXXXX. oXXXXX",
+"X XXXXX.  XXXXXX",
+". .XX.    .XXXXX",
+"   ..  ooo .....",
+"      oXXXo     "
+};

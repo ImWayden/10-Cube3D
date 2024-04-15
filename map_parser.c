@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 23:27:33 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/11 16:16:38 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 11:57:05 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,17 @@ static int cub_analyzer(char *line, t_mapdata *data, int fd)
 	if(line[i] && line[i + 1])
 	{
 		if (line[i] == 'N' && line[i + 1] == 'O')
-			data->path_no = get_texture_path(&line[i + 1], data->path_no);
+			data->path[NO] = get_texture_path(&line[i + 1], data->path[NO]);
 		else if (line[i] == 'S' && line[i + 1] == 'O')
-			data->path_so = get_texture_path(&line[i + 1], data->path_so);
+			data->path[SO] = get_texture_path(&line[i + 1], data->path[SO]);
 		else if (line[i] == 'W' && line[i + 1] == 'E')
-			data->path_we = get_texture_path(&line[i + 1], data->path_we);
+			data->path[WE] = get_texture_path(&line[i + 1], data->path[WE]);
 		else if (line[i] == 'E' && line[i + 1] == 'A')
-			data->path_ea = get_texture_path(&line[i + 1], data->path_ea);
+			data->path[EA] = get_texture_path(&line[i + 1], data->path[EA]);
 		else if (line[i] == 'F')
-			data->color_floor = get_color(&line[i + 1]);
+			data->c_floor = get_color(&line[i + 1]);
 		else if (line[i] == 'C')
-			data->color_ceiling = get_color(&line[i + 1]);
+			data->c_ceiling = get_color(&line[i + 1]);
 		else if (line[i] == '0' || line[i] == '1')
 			data->map = map_parser(line, data, fd);
 		else

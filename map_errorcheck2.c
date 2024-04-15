@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 22:59:19 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/12 00:08:01 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 11:55:49 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int check_colors(t_mapdata *data)
 {
-	if(data->color_ceiling.a + data->color_floor.a)
+	if(data->c_ceiling.a + data->c_floor.a)
 		return(ERRCODE_COLOR_INVALID);
 	return (0);
 }
@@ -23,19 +23,19 @@ static int check_textures(t_mapdata *data)
 {
 	int fd;
 
-	fd = open(data->path_we, O_RDONLY);
+	fd = open(data->path[WE], O_RDONLY);
 	if (fd == -1)
 		return (ERRCODE_PATH_WEST);
 	close(fd);
-	fd = open(data->path_ea, O_RDONLY);
+	fd = open(data->path[EA], O_RDONLY);
 	if (fd == -1)
 		return (ERRCODE_PATH_EAST);
 	close(fd);
-	fd = open(data->path_so, O_RDONLY);
+	fd = open(data->path[SO], O_RDONLY);
 	if (fd == -1)
 		return (ERRCODE_PATH_SOUTH);
 	close(fd);
-	fd = open(data->path_no, O_RDONLY);
+	fd = open(data->path[NO], O_RDONLY);
 	if (fd == -1)
 		return (ERRCODE_PATH_NORTH);
 	close(fd);

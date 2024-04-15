@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:16:01 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/12 00:38:59 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/15 11:50:21 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 // 	};
 	
 // }
+typedef struct s_int_range{
+
+	int start; 
+	int end;
+	
+} t_range;
+
 typedef struct s_vec2
 {
 	double x;
@@ -55,13 +62,10 @@ typedef struct s_mapdata
 	int		length;
 	int		fd;
 	char	*char_map;
-	char	*path_no;
-	char	*path_so;
-	char	*path_we;
-	char	*path_ea;
+	char	*path[4];
 	char	*name_file;
-	t_color	color_floor;
-	t_color	color_ceiling;
+	t_color	c_floor;
+	t_color	c_ceiling;
 	t_vec2 spawnpoint;
 	t_vec2 spawndir;
 }	t_mapdata;
@@ -128,10 +132,20 @@ typedef struct s_rayutils{
 	int side;
 } t_rayutils;
 
+typedef struct s_xpm_texture{
+	t_img	img;
+	int		width;
+	int		height;
+	t_vec2	pos_in;
+} t_xpm_texture;
+
 typedef struct s_lineinfo{
 	int start;
 	int end;
 	int x;
+	int tex_x;
+	int tex_y;
+	t_xpm_texture *texture;
 	t_color color;
 } t_lineinfo;
 

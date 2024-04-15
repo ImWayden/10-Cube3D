@@ -6,12 +6,12 @@
 #    By: wayden <wayden@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 19:22:33 by wayden            #+#    #+#              #
-#    Updated: 2024/04/12 00:55:43 by wayden           ###   ########.fr        #
+#    Updated: 2024/04/15 12:17:17 by wayden           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = cc
-CXXFLAGS = -Wall -Werror -Wextra
+CXXFLAGS = -g3
 
 SRCS = main.c\
 	map_errorcheck.c map_errorcheck2.c map_parser2.c map_parser.c map_utils.c \
@@ -19,7 +19,7 @@ SRCS = main.c\
 	
 SRCS_DEBUG = main_debug.c\
 	map_errorcheck.c map_errorcheck2.c map_parser2.c map_parser.c map_utils.c\
-	error_manager.c singletons.c vec2_utils.c mlx_utils.c\
+	error_manager.c singletons.c vec2_utils.c mlx_utils.c math_utils.c\
 	error_manager.c singletons.c raytracing.c hooks.c 
  
 OBJS = $(patsubst %.c,obj/%.o,$(SRCS))
@@ -52,10 +52,10 @@ obj_debug:
 	mkdir -p obj_debug
 	
 $(NAME): $(OBJS) $(LIBS_A) 
-	$(CXX) $(CXXFLAGS) -o $@ $^ -lmlx -lX11 -lXext
+	$(CXX) $(CXXFLAGS) -o $@ $^ -lmlx -lX11 -lXext -lm
 
 $(NAME_DEBUG): $(OBJS_DEBUG) $(LIBS_A) 
-	$(CXX) $(CXXFLAGS) -g3 -DDEBUG=1 -o $@ $^ -lmlx -lX11 -lXext
+	$(CXX) $(CXXFLAGS) -g3 -DDEBUG=0 -o $@ $^ libs/libmlx_Linux/mlx_xpm.c -lmlx -lX11 -lXext -lm
 
 obj/%.o: %.c
 	$(CXX) $(CXXFLAGS) -g3 -c $< -o $@
