@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:21:20 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 19:57:32 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/20 12:11:15 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ int **map)
 		player->pos.y = target.y;
 }
 
+
+/*
+	L'idée pour ce deplacer est assez simple puisque l'on vas 
+	simplement creer un vecteur plus ou moin long (en fonction de la vitesse du joueur)
+	et ensuite on vas ajouter ce vecteur a la position de notre joueur
+*/
 void move_forward(t_player *player, int **map)
 {
 	t_vec2 target;
@@ -74,11 +80,19 @@ void move_right(t_player *player, int **map)
 	collision_check(target, to_check, player, map);
 }
 
+/*
+	la rotation est un peu plus complexe que simplement ce mouvoir
+	puisque l'on dois changer le vecteur de direction (player.dir)
+	et ensuite on recréer le vecteur de camera perpendiculaire
+	https://fr.wikipedia.org/wiki/Rotation_vectorielle
+*/
 void rotate_left(t_player *player)
 {
 	double tmp = player->direction.x;
+	printf("Rotate_left Called\n");//debug
     player->direction.x = player->direction.x * cos(-player->speed)\
 	- player->direction.y * sin(-player->speed);
+	
     player->direction.y = tmp * sin(-player->speed)\
 	+ player->direction.y * cos(-player->speed);	
 	player->camera = vec2_perpendicular(player->direction, LEFT);

@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:33:35 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 19:56:59 by wayden           ###   ########.fr       */
+/*   Updated: 2024/04/18 10:22:08 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,10 @@ void print_line(t_player *player, int x, t_rayutils *u, t_img *img)
     if(r.start < 0) 
 		r.start = 0;
     if(r.end >= HEIGHT)
-		r.end = HEIGHT - 1;
-	ver_line_x(img, get_mapdata(NULL)->c_floor, (t_range){0,r.start - 1}, x);
+		r.end = HEIGHT;
+	ver_line_x(img, get_mapdata(NULL)->c_floor, (t_range){0,r.start}, x);
 	tex_ver_line_x(img, texture, r, x);
-	ver_line_x(img, get_mapdata(NULL)->c_ceiling, (t_range){r.end, HEIGHT-1}, x);
+	ver_line_x(img, get_mapdata(NULL)->c_ceiling, (t_range){r.end, HEIGHT}, x);
 }
 
 void update_raycast(t_player *player, t_mapdata *data, t_mlx *mlx, t_img *img)

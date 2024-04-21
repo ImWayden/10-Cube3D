@@ -1,8 +1,7 @@
-
-Path checker ne prend pas en compte une erreur de path 
-vers texture si jamais le path est valide mais suivi d'un espace
- et d'une lettre
-
+✘ a faire
+✘✘ pas necessaire
+✘✘✘✘ a ne pas faire finalement
+✔ fait
 
 Map parser:
 	-Besoin de retest depuis la tentative d'optimisation ✔
@@ -11,38 +10,49 @@ Player:
 	-besoin de setup sa pos en fonction du point de spawn ✔
 	-besoin de setup sa direction en fonction du type du point de spawn ✔
 	-besoin de setup camera perpendicualirement a sa direction ✔
+	-potentiellement ajouter une composante rotation speed plutot que d'utiliser la vitesse ✘
 
 Raytracing:
 	-incorporer la fonction update raytracing a l'updater ✔
 	-changer la couleur en fonction du side ✔
-		probablement besoin de rajouter un moyen de savoir quel side a ete toucher ✔
 	-ajouter gestion de textures ✔
-		probablement besoin de decomposer l'img de textures en pixel
-		puis en fonction de l'endroit taper sur le mur par le rayon ainsi qu'en fonction de la position y imprimer la couleur de pixel correpsondant a la texture, pour ca il vas probabvlement faloir faire correspondre la taille de la texture a la taille du mur
 
 Keybinds:
-	-ajouter la possibiliter de bouger
+	-ajouter la possibiliter de bouger ✔
 	-ajouter pivot de camera
-		hook update changement enfocntion de la psotion du curseur avant recentrage de celui ci
-	-ajouter menu pause
-	-quitter en cliquant sur la croix
+		. via fleches ✔
+		. via souris : ✘
+	-ajouter menu pause ✘
+	-quitter en cliquant sur la croix ✔
 		
 
 Menu Pause:
-	-ajouter menu keybinds management
-	-ajouter un bouton pour quitter
-	-ajouter un bouton changement de spawn
+	- ajouter menu keybinds management ✘
+	- ajouter un bouton pour quitter ✘
+	- ajouter un bouton changement de spawn ✘✘✘✘✘
 
 
 Mlx Utils:
-	-ajouter un createur de bouton
-		doit prendre position du bouton taille couleur et texte
-		ou image on et image off
+	- line painter x ✔
+	- line painter x textured ✔
+	- ajouter un createur de bouton ✘
+		.doit prendre position du bouton taille couleur et texte
+		 ou image on et image off
 
 
- Affichage:
-	-ajouter couleur plafond ✔
-	-ajouter couleur sol ✔
+Affichage:
+	- ajouter couleur plafond ✔
+	- ajouter couleur sol ✔
+
+Autres:
+	- Wall Colision ✔
+	- Doors ✘
+	- Minimap ✘
+	- supprimer les commentaires mes commentaire et ligne de debug ✘
+	- Mettre a la norme ✘
 
 Gestion d'erreur:
-	-gerer le cas ou la texture est invalide
+	- gerer le cas ou la texture est invalide mais son path correct ✘
+	- Erreur Verification Path to texture ✘
+		le path est considerer comme valide meme s'il est suivi d'un espace
+ 		et d'un caractere suplementaire
