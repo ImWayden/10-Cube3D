@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:50:40 by wayden            #+#    #+#             */
-/*   Updated: 2024/11/12 21:32:55 by wayden           ###   ########.fr       */
+/*   Updated: 2024/11/13 03:40:26 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static int	keyboard_manager(int keycode, void *param)
 	(void)((keycode == XK_s) && (move_backward(player, map), 1));
 	(void)((keycode == XK_d) && (move_left(player, map), 1));
 	(void)((keycode == XK_a) && (move_right(player, map), 1));
-	(void)((keycode == XK_Left) && (rotate_left(player, 0.1), 1));
-	(void)((keycode == XK_Right) && (rotate_right(player, 0.1), 1));
+	(void)((keycode == XK_Left) && (rotate_left(player, 0.15), 1));
+	(void)((keycode == XK_Right) && (rotate_right(player, 0.15), 1));
 	(void)((keycode == XK_Escape) && (destroy_app(get_mlx()), 1));
 	
 	return (1);

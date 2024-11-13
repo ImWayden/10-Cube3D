@@ -6,7 +6,7 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 23:35:13 by wayden            #+#    #+#             */
-/*   Updated: 2024/11/13 02:33:34 by wayden           ###   ########.fr       */
+/*   Updated: 2024/11/13 03:41:12 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@
 #define ERR_KEYCOUNT_EA "Mutiple key detected : EA\n"
 #define ERR_KEYCOUNT_F "Mutiple key detected : F\n"
 #define ERR_KEYCOUNT_C "Mutiple key detected : C\n"
-//obsolete should have been used to differenciate beetween multiple path and invalid path 
-# define ERR_PATH_EAST2 "Path east err placeholder"
-# define ERR_PATH_WEST2 "Path west err placeholder"
-# define ERR_PATH_NORTH2 "Path north err placeholder"
-# define ERR_PATH_SOUTH2 "Path South err placeholder"
 
 # define ERR_COLOR_INVALID "Invalid Color, color components should be in range [0,255] and following the format r, g, b\nExemple : 112, 128, 144\n"
 
@@ -74,6 +69,8 @@
 
 # define WIDTH 1600
 # define HEIGHT 900
+
+# define TOLERANCE 0.1
 
 # define DEBUG 0
 
