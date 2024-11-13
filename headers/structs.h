@@ -6,13 +6,12 @@
 /*   By: wayden <wayden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:16:01 by wayden            #+#    #+#             */
-/*   Updated: 2024/04/15 19:12:02 by wayden           ###   ########.fr       */
+/*   Updated: 2024/11/13 01:51:04 by wayden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
 
 // union u_color
 // {
@@ -20,25 +19,26 @@
 // 	{
 // 		int	r;
 // 		int	g;
-// 		int	b;	
+// 		int	b;
 // 	};
-	
-// }
-typedef struct s_int_range{
 
-	int start; 
-	int end;
-	
-} t_range;
+// }
+typedef struct s_int_range
+{
+	int					start;
+	int					end;
+
+}						t_range;
 
 typedef struct s_vec2
 {
-	double x;
-	double y;	
-} t_vec2;
+	double				x;
+	double				y;
+}						t_vec2;
 
-typedef union s_color {
-	unsigned int hex;
+typedef union s_color
+{
+	unsigned int		hex;
 	struct
 	{
 		unsigned char	r;
@@ -46,108 +46,115 @@ typedef union s_color {
 		unsigned char	b;
 		unsigned char	a;
 	};
-}	t_color;
+}						t_color;
 
-typedef struct s_spawnpoints{
-	t_vec2 n;
-	t_vec2 s;
-	t_vec2 w;
-	t_vec2 e;
-} t_spawnpoints;
+typedef struct s_spawnpoints
+{
+	t_vec2				n;
+	t_vec2				s;
+	t_vec2				w;
+	t_vec2				e;
+}						t_spawnpoints;
 
 typedef struct s_mapdata
 {
-	int		**map;
-	int		size;
-	int		length;
-	int		fd;
-	char	*char_map;
-	char	*path[4];
-	char	*name_file;
-	t_color	c_floor;
-	t_color	c_ceiling;
-	t_vec2 spawnpoint;
-	t_vec2 spawndir;
-}	t_mapdata;
+	int					**map;
+	int					size;
+	int					length;
+	int					fd;
+	int					keycount[6];
+	char				*char_map;
+	char				*path[4];
+	char				*name_file;
+	t_color				c_floor;
+	t_color				c_ceiling;
+	t_vec2				spawnpoint;
+	t_vec2				spawndir;
+}						t_mapdata;
 
 typedef struct s_cubvar
 {
-	int no;
-	int so;
-	int we;
-	int ea;
-} t_cubvar;
+	int					no;
+	int					so;
+	int					we;
+	int					ea;
+}						t_cubvar;
 
 typedef struct s_player
 {
-	t_vec2 pos;
-	t_vec2 direction;
-	t_vec2 camera;
-	double speed;
-} t_player;
+	t_vec2				pos;
+	t_vec2				direction;
+	t_vec2				camera;
+	double				speed;
+	int					is_mouselock;
+}						t_player;
 
 typedef struct s_mlx
 {
-    void *mlx_ptr;
-    void *win_ptr;
+	void				*mlx_ptr;
+	void				*win_ptr;
 
-}   t_mlx;
+}						t_mlx;
 
-typedef struct	s_img {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_img;
+typedef struct s_img
+{
+	void				*img;
+	char				*addr;
+	int					bits_per_pixel;
+	int					line_length;
+	int					endian;
+}						t_img;
 
-typedef struct s_keybinds{
-	
-	int walk_up;
-	int walk_left;
-	int walk_right;
-	int walk_down;
-} t_keybinds;
+typedef struct s_keybinds
+{
+	int					walk_up;
+	int					walk_left;
+	int					walk_right;
+	int					walk_down;
+}						t_keybinds;
 
-typedef struct s_raydata{
-	
-	double *deltadist;
-	double *sidedist;
-	double *raydir;
-	int *step;
-	
-} t_raydata;
+typedef struct s_raydata
+{
+	double				*deltadist;
+	double				*sidedist;
+	double				*raydir;
+	int					*step;
 
-typedef struct s_rayutils{
-	double camera_x; 
-	int map_x; //coordonée de la case sur laquelle se trouve le joueur 
-	int map_y; // changera au fur et a mesure que le rayon sera trqace
-	t_vec2 ray_dir; //player dir
-	t_vec2 side_dist; // contient a la fois la taille du rayon vers le rpochainn x et le provhain y
-	t_vec2 delta_dist;
-	double perp_wall_dist;
-	int step_x;
-	int step_y;
-	int hit;
-	int side;
-} t_rayutils;
+}						t_raydata;
 
-typedef struct s_xpm_texture{
-	t_img	img;
-	int		width;
-	int		height;
-	t_vec2	pos_in;
-	double	lineheight;
-} t_xpm_texture;
+typedef struct s_rayutils
+{
+	double				camera_x;
+	int					map_x;
+	int					map_y;
+	t_vec2				ray_dir;
+	t_vec2				side_dist;
+	t_vec2				delta_dist;
+	double				perp_wall_dist;
+	int					step_x;
+	int					step_y;
+	int					hit;
+	int					side;
+}						t_rayutils;
 
-typedef struct s_lineinfo{
-	int start;
-	int end;
-	int x;
-	int tex_x;
-	int tex_y;
-	t_xpm_texture *texture;
-	t_color color;
-} t_lineinfo;
+typedef struct s_xpm_texture
+{
+	t_img				img;
+	int					width;
+	int					height;
+	t_vec2				pos_in;
+	double				lineheight;
+}						t_xpm_texture;
+
+typedef struct s_lineinfo
+{
+	int					start;
+	int					end;
+	int					x;
+	int					tex_x;
+	int					tex_y;
+	t_xpm_texture		*texture;
+	t_color				color;
+}						t_lineinfo;
 
 #endif

@@ -1,0 +1,14 @@
+NO ./Assets/Textures/Wall_North_DEBUG.xpm
+SO ./Assets/Textures/Wall_South_DEBUG.xpm
+WE ./Assets/Textures/Wall_West_DEBUG.xpm
+EA ./Assets/Textures/Wall_East_DEBUG.xpm
+
+C 135,206,235
+F 112, 128, 144
+
+111111111111111
+100001010100001
+110000000000001   
+1100000W0010001
+100000000000001
+111111111111111

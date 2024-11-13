@@ -1,0 +1,25 @@
+/* XPM */
+static char *Wall_East_DEBUG[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 3 1 ",
+"  c black",
+". c #00BFD1",
+"X c #00E9FF",
+/* pixels */
+"XXXXXXXXXXXXXXXX",
+"XXXXXXXXXXXXXXXX",
+"XXXXXXXXXXXXXXXX",
+"XXXXXXXXXXXXXXXX",
+"XXXXX      XXXXX",
+"XXXXX .XXXXXXXXX",
+"XXXXX .XXXXXXXXX",
+"XXXXX .XXXXXXXXX",
+"XXXXX      XXXXX",
+"XXXXX .XXXXXXXXX",
+"XXXXX .XXXXXXXXX",
+"XXXXX .XXXXXXXXX",
+"XXXXX      XXXXX",
+"XXXXXXXXXXXXXXXX",
+"XXXXXXXXXXXXXXXX",
+"XXXXXXXXXXXXXXXX"
+};

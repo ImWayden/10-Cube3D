@@ -35,7 +35,7 @@ Menu Pause:
 Mlx Utils:
 	- line painter x ✔
 	- line painter x textured ✔
-	- ajouter un createur de bouton ✘
+	- ajouter un createur de bouton ✘✘
 		.doit prendre position du bouton taille couleur et texte
 		 ou image on et image off
 
@@ -46,13 +46,14 @@ Affichage:
 
 Autres:
 	- Wall Colision ✔
-	- Doors ✘
-	- Minimap ✘
+	- Doors ✘✘
+	- Minimap ✘✘
 	- supprimer les commentaires mes commentaire et ligne de debug ✘
 	- Mettre a la norme ✘
 
 Gestion d'erreur:
 	- gerer le cas ou la texture est invalide mais son path correct ✘
-	- Erreur Verification Path to texture ✘
+	- Erreur Verification Path to texture ✔
 		le path est considerer comme valide meme s'il est suivi d'un espace
  		et d'un caractere suplementaire
+	- ne pas tenter de free les textures si elle non jamais ete init

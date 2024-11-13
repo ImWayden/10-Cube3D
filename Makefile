@@ -3,31 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wayden <wayden@student.42.fr>              +#+  +:+       +#+         #
+#    By: therodri <therodri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 19:22:33 by wayden            #+#    #+#              #
-#    Updated: 2024/04/15 20:23:36 by wayden           ###   ########.fr        #
+#    Updated: 2024/04/21 20:43:25 by therodri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = cc
 CXXFLAGS = -Wall -Werror -Wextra
 
-SRCS = main.c\
-	map_errorcheck.c map_errorcheck2.c map_parser2.c map_parser.c map_utils.c \
-	error_manager.c singletons.c raytracing.c hooks.c
-	
-SRCS_DEBUG = main_debug.c\
-	map_errorcheck.c map_errorcheck2.c map_parser2.c map_parser.c map_utils.c\
-	error_manager.c singletons.c vec2_utils.c mlx_utils.c math_utils.c\
-	error_manager.c singletons.c raytracing.c hooks.c mov_direction.c\
- 
-OBJS = $(patsubst %.c,obj/%.o,$(SRCS))
+SRCDIR = source
 
-OBJS_DEBUG = $(patsubst %.c,obj_debug/%.o,$(SRCS_DEBUG))
+SRCS = $(wildcard $(SRCDIR)/*.c)
+
+OBJS = $(patsubst $(SRCDIR)/%.c,obj/%.o,$(SRCS))
 
 NAME = Cub3D
-NAME_DEBUG = Cub3D_DebugBuild
 
 LIBS_DIR = libs
 LIB_MLX = libmlx_Linux
@@ -43,31 +35,19 @@ PATH_LIB = $(PATH_MLX) $(PATH_FT)
 
 all: obj $(NAME)
 
-debug: obj_debug $(NAME_DEBUG)
-
 obj:
 	mkdir -p obj
 	
-obj_debug:
-	mkdir -p obj_debug
-	
 $(NAME): $(OBJS) $(LIBS_A) 
-	$(CXX) $(CXXFLAGS) -o $@ $^ -lmlx -lX11 -lXext -lm
+	$(CXX) $(CXXFLAGS) -o $@ $^ -lX11 -lXext -lm
 
-$(NAME_DEBUG): $(OBJS_DEBUG) $(LIBS_A) 
-	$(CXX) $(CXXFLAGS) -DDEBUG=0 -o $@ $^ -lmlx -lX11 -lXext -lm
-
-obj/%.o: %.c
+obj/%.o: $(SRCDIR)/%.c
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-obj_debug/%.o: %.c
-	$(CXX) $(CXXFLAGS) -c $< -o $@ 
 
 $(LIBS_A):
 	for path in $(PATH_LIB); do \
 		$(MAKE) -C $$path; \
 	done
-	
 re: fclean all
 
 clean:
